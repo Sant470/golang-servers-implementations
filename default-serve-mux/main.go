@@ -1,5 +1,5 @@
 /*
-Using the global instance of ServeMux which is explicitly provided by net http package.
+Using the global instance of ServeMux which is provided by net http package.
 */
 
 package main
