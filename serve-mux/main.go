@@ -1,5 +1,5 @@
 /*
-ServerMux is request multiplexer which solves the problem of associating different urls to different methods.
+ServeMux is request multiplexer which solves the problem of associating different urls to different methods.
 
 type HandlerFunc(rw http.ResponseWriter, r *http.Request)
 
@@ -16,15 +16,15 @@ type muxEntry struct {
 	handler Handler
 }
 
-type ServerMux struct {
+type ServeMux struct {
 	mu map[string]muxEntry
 }
 
-func (mux *ServerMux) Handle(pattern string, h Handler) {
+func (mux *ServeMux) Handle(pattern string, h Handler) {
 	mux.mu[pattern] = Handler
 }
 
-func (mux *ServerMux) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
+func (mux *ServeMux) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	pattern := r.URL.Path
 	h := mux.mu[pattern]
 	h.ServeHTTP(rw, r)
